@@ -30,7 +30,8 @@ module.exports = function makeWebpackConfig() {
    * Karma will set this when it's a test build
    */
   config.entry = isTest ? void 0 : {
-    app: './src/app/app.js'
+    app: './src/app/app.js',
+    style: './src/styles/app.css'
   };
 
   /**
@@ -80,7 +81,8 @@ module.exports = function makeWebpackConfig() {
 
   // Initialize module
   config.module = {
-    rules: [{
+    rules: [
+    {
       // JS LOADER
       // Reference: https://github.com/babel/babel-loader
       // Transpile .js files using babel-loader
@@ -105,11 +107,12 @@ module.exports = function makeWebpackConfig() {
       loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({
         fallbackLoader: 'style-loader',
         loader: [
-          {loader: 'css-loader', query: {sourceMap: true}},
-          {loader: 'postcss-loader'}
+          {loader: 'css-loader', query: {sourceMap: true}, options: { minimize: true }},
+          {loader: 'postcss-loader'},
         ],
       })
-    }, {
+    },
+    {
       // ASSET LOADER
       // Reference: https://github.com/webpack/file-loader
       // Copy png, jpg, jpeg, gif, svg, woff, woff2, ttf, eot files to output
@@ -183,7 +186,7 @@ module.exports = function makeWebpackConfig() {
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Extract css files
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin({filename: 'css/[name].css', disable: !isProd, allChunks: true})
+      new ExtractTextPlugin({filename: '/src/styles/[name].css', disable: !isProd, allChunks: true})
     )
   }
 
@@ -206,7 +209,12 @@ module.exports = function makeWebpackConfig() {
       // Reference: https://github.com/kevlened/copy-webpack-plugin
       new CopyWebpackPlugin([{
         from: __dirname + '/src/public'
-      }])
+      }]),
+
+      /*
+      new CopyWebpackPlugin([{
+        from: __dirname + '/src/styles/app.css'
+      }])*/
     )
   }
 
@@ -223,3 +231,6 @@ module.exports = function makeWebpackConfig() {
 
   return config;
 }();
+
+
+

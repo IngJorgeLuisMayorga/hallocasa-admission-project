@@ -1,0 +1,14 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "editor.tabSize": 2,
+    "editor.rulers": [120],
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "onFocusChange",
+     "files.exclude": {
+        "scratch": true,
+        "node_modules": true,
+        "public": true,
+        "*_TEMPLATE.md": true,
+        ".idea": true
+     }
+}

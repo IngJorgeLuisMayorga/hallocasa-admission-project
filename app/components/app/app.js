@@ -11,20 +11,15 @@ angular.module('ngApp', [
     , require('angular-material')
     , require('../navbar/navbar')
     , require('../sidenav/sidenav')
-    , require('../login/login')
     , require('../notfound/notfound')
-    , require('../../directives/shakeThat')
     , require('../../directives/geoplace')
     , require('../../routes/home/home')
-    , require('../../routes/about/about')
-    , require('../../routes/admin/admin')
     , require('../../routes/showlocation/showlocation')
     , require('../../routes/manage/manage')
     , require('../../services/account')
     , require('../../services/auth')
     , require('../../services/ui')
     , require('../../services/cache')
-    , require('../../filters/percentage')
     , require('../../../scratch/templates')
     ])
   .config(['$mdIconProvider', function($mdIconProvider) {
@@ -52,8 +47,6 @@ angular.module('ngApp', [
       , { path: '/manage', component: 'manage', name: 'Manage' }
       , { path: '/show', component: 'showlocation', name: 'Show' }
 
-      , { path: '/about', component: 'about', name: 'About' }
-      , { path: '/admin/...', component: 'admin', name: 'Admin' }
       , { path: '/**', component: 'notfound', name: 'NotFound' }
 
     ]

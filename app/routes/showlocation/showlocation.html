@@ -35,19 +35,27 @@
     </ng-map>
   </div>
 
+</section>
+
 <h2>GET A ROUTE !</h2>
+
+  <section layout="row" layout-align="center center" layout-wrap>
+
+
+
+
   <md-select ng-model="vm.locationFrom">
       <md-option ng-disable="true"><em>From</em></md-option>
-      <md-option ng-repeat="place in vm.STORAGE" ng-value="place.name">
-        {{place.name}}
+      <md-option ng-repeat="place in vm.STORAGE" ng-value="place.address">
+        {{place.address}}
       </md-option>
   </md-select>
 
 
   <md-select ng-model="vm.locationTo">
-      <md-option ng-disable="true"><em>From</em></md-option>
-      <md-option ng-repeat="place in vm.STORAGE" ng-value="place.name">
-        {{place.name}}
+      <md-option ng-disable="true"><em>TO</em></md-option>
+      <md-option ng-repeat="place in vm.STORAGE" ng-value="place.address">
+        {{place.address}}
       </md-option>
   </md-select>
 

@@ -6,14 +6,14 @@
 
         <div class="item-location" layout="row" layout-padding ng-cloak>
 
-            <div class=delete-btn>
+            <div class=delete-btn ng-click="vm.deleteOnStorage(key)">
                 <md-icon md-font-icon="mdi-delete"></md-icon>
             </div>
 
             <div class="tag-box">
                 <md-input-container>
                     <label>Place Name</label>
-                    <input ng-model="vm.STORAGE[key].name">
+                    <input ng-model="vm.STORAGE[key].name" ng-blur="vm.updateName(vm.STORAGE[key].name,key)">
                 </md-input-container>
             </div>
 
@@ -43,6 +43,48 @@
         </div>
 
     </div>
+
+    <br>
+
+        <div class="item-location-new" layout="row" layout-padding ng-cloak >
+
+                <div class=delete-btn>
+                    <md-icon md-font-icon="mdi-add"></md-icon>
+                </div>
+
+                <div class="tag-box">
+                    <md-input-container>
+                        <label>Place Name</label>
+                        <input ng-model="vm.NEW.name">
+                    </md-input-container>
+                </div>
+
+                <div class="search-box">
+                        <md-autocomplete style="min-width:300px;width:fit-content;"
+                        md-selected-item="vm.NEW.address"
+                        md-no-cache="true"
+                        md-search-text="vm.NEW.search"
+                        md-items="querynew in vm.querySearchNew(vm.NEW.search)"
+                        md-item-text="querynew.formatted_address"
+                        md-floating-label="Place Address"
+                        md-min-length="0"
+                        ng-blur = "vm.addToStorage()"
+                        placeholder="Input" style="color:black;">
+                        <span md-highlight-text="vm.NEW.search">
+                                {{ querynew.formatted_address }}
+                             </span>
+                       </md-autocomplete >
+                </div>
+
+                <div class="position-box">
+                    <span class="lat">Lat : {{vm.NEW.position.lat | number : 4}} </span>
+                    <br>
+                    <span class="lng">Long :  {{vm.NEW.position.lng | number : 4}} </span>
+                </div>
+
+
+            </div>
+
   </div>
   </section>
 </md-content>

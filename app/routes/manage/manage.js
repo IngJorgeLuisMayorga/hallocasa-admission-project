@@ -65,6 +65,16 @@ function ManageController($http,$rootScope) {
           }
         };
         vm.STORAGE[k] = placeObj;
+        vm.NEW = {
+          id : 0,
+          name : '',
+          search : '',
+          address : '',
+          position : {
+            lat : 0.0,
+            lng : 0.0
+          }
+        };
         $rootScope.gSTORAGE = vm.STORAGE;
 
       });
@@ -83,6 +93,18 @@ function ManageController($http,$rootScope) {
     vm.STORAGE[key].lng = placesLatLon.lng;
 
     $rootScope.gSTORAGE = vm.STORAGE;
+
+    return placesResults;
+  }
+
+  vm.querySearchNew = async function(query) {
+    //var results = vm.locationList.filter( location => { return parseFloat(vm.similarity(location,query)) > 0.5 });
+    let placesObj = await vm.getPlace(query);
+    let placesResults = placesObj.data.results;
+    let placesLatLon = placesResults[0].geometry.location;
+
+    vm.NEW.position.lat = placesLatLon.lat;
+    vm.NEW.position.lng = placesLatLon.lng;
 
     console.log(placesObj)
     return placesResults;
@@ -134,8 +156,50 @@ vm.editDistance = function(s1, s2) {
 }
 
 
+vm.AddNewToStorage = function(){
 
+  console.log(vm.NEW)
 
+  vm.STORAGE.push(vm.NEW);
+  $rootScope.gSTORAGE = vm.STORAGE;
+  vm.NEW = {
+    id : 0,
+    name : '',
+    search : '',
+    address : '',
+    position : {
+      lat : 0.0,
+      lng : 0.0
+    }
+  };
+
+}
+
+vm.updateName = function(obj,key){
+vm.STORAGE[key].name = obj;
+}
+
+vm.addToStorage = function(){
+  vm.NEW.address = vm.NEW.address.formatted_address;
+  vm.STORAGE.push(vm.NEW);
+  $rootScope.gSTORAGE = vm.STORAGE;
+  vm.NEW = {
+    id : 0,
+    name : '',
+    search : '',
+    address : '',
+    position : {
+      lat : 0.0,
+      lng : 0.0
+    }
+  };
+
+  console.log(vm.STORAGE);
+}
+
+vm.deleteOnStorage = function(key){
+  vm.STORAGE.splice(key,1);
+}
 
 
 

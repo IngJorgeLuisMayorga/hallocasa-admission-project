@@ -23,10 +23,7 @@
     <md-content>
         <md-list>
 
-            <md-list-item ng-click="vm.navigate(['/Home'])">
-                <md-icon md-font-icon="mdi-home" style="fill: green"></md-icon>
-                <p>Home</p>
-            </md-list-item>
+
 
             <md-list-item ng-click="vm.navigate(['/Show'])">
                 <md-icon md-font-icon="mdi-map" style="fill: green"></md-icon>
@@ -36,21 +33,6 @@
             <md-list-item ng-click="vm.navigate(['/Manage'])">
                 <md-icon md-font-icon="mdi-view-dashboard" style="fill: green"></md-icon>
                 <p>Manage Locations</p>
-            </md-list-item>
-
-            <md-list-item ng-if="vm.isAuthenticated()"
-                ng-click="vm.navigate(['/About'])">
-                <md-icon md-font-icon="mdi-account-circle"></md-icon>
-                <p>Account</p>
-                <md-divider></md-divider>
-            </md-list-item>
-            <md-list-item class="md-2-line"
-                            ng-if="vm.isAdmin()"
-                            ng-click="vm.navigate(['/Admin/Dashboard', { someParam: 'justAdemo'}])">
-                <md-icon md-font-icon="mdi-account-multiple"></md-icon>
-                <div class="md-list-item-text">
-                    <h3>Admin Dashboard</h3>
-                </div>
             </md-list-item>
 
 

@@ -8,12 +8,13 @@ angular.module('ngApp', [
     , require('angular-messages')
     , require('angular-resource')
     , require('angular-material-data-table')
-    , require('angular-material') //make sure this is loaded after any other material dependency
+    , require('angular-material')
     , require('../navbar/navbar')
     , require('../sidenav/sidenav')
     , require('../login/login')
     , require('../notfound/notfound')
     , require('../../directives/shakeThat')
+    , require('../../directives/geoplace')
     , require('../../routes/home/home')
     , require('../../routes/about/about')
     , require('../../routes/admin/admin')
@@ -31,12 +32,15 @@ angular.module('ngApp', [
       .defaultIconSet('fonts/materialdesignicons-webfont.svg')
       .defaultFontSet('mdi')
   }])
-  .run(['$templateRequest', function($templateRequest){
+  .run(['$templateRequest','NgMap','$rootScope', function($templateRequest,NgMap,$rootScope){
     var urls = ['fonts/materialdesignicons-webfont.svg']
 
     angular.forEach(urls, function(url) {
       $templateRequest(url)
     })
+
+
+
   }])
   .value('$routerRootComponent', 'app')
   .component('app', {
@@ -54,3 +58,4 @@ angular.module('ngApp', [
 
     ]
   })
+

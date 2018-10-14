@@ -1,5 +1,65 @@
 <md-content>
-  <section layout="column" layout-align="center center" layout-wrap>
-      <h2>MANAGE LOCATION</h2>
+  <section layout="column" layout-align="start start" layout-wrap>
+  <h2>MANAGE LOCATIONS</h2>
+  <div layout="column" layout-padding ng-cloak>
+    <div flex ng-repeat="(key, item) in vm.STORAGE track by $index" >
+
+        <div class="item-location" layout="row" layout-padding ng-cloak>
+
+            <div class=delete-btn>
+                <md-icon md-font-icon="mdi-delete"></md-icon>
+            </div>
+
+            <div class="tag-box">
+                <md-input-container>
+                    <label>Place Name</label>
+                    <input ng-model="vm.STORAGE[key].name">
+                </md-input-container>
+            </div>
+
+            <div class="search-box">
+                    <md-autocomplete style="min-width:300px;width:fit-content;"
+                    md-selected-item="vm.STORAGE[key].address"
+                    md-no-cache="true"
+                    md-search-text="vm.STORAGE[key].search"
+                    md-items="query in vm.querySearch(vm.STORAGE[key].search,key)"
+                    md-item-text="query.formatted_address"
+                    md-floating-label="Place Address"
+                    md-min-length="0"
+                    placeholder="Input" style="color:black;">
+                    <span md-highlight-text="vm.STORAGE[key].search">
+                            {{ query.formatted_address }}
+                         </span>
+                   </md-autocomplete >
+            </div>
+
+            <div class="position-box">
+                <span class="lat">Lat : {{vm.STORAGE[key].position.lat | number : 4}} </span>
+                <br>
+                <span class="lng">Long :  {{vm.STORAGE[key].position.lng | number : 4}} </span>
+            </div>
+
+
+        </div>
+
+    </div>
+  </div>
   </section>
 </md-content>
+
+
+
+
+<!--
+
+    <span> {{item}} </span>
+        <br>
+        <md-input-container class="md-icon-float md-block">
+
+            <label>Place : </label>
+            <input md-maxlength="150" ng-model="item"  size="10"   style="min-width:350px;width:auto;">
+        </md-input-container>
+        <br>
+
+
+-->

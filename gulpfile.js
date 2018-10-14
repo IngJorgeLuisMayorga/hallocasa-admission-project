@@ -7,7 +7,7 @@ var buffer = require('vinyl-buffer')
 var argv = require('yargs').argv
 var $ = require('gulp-load-plugins')({lazy: true})
 
-gulp.task('build', ['templates', 'lint', 'static'], function () {
+gulp.task('build', ['templates'/*, 'lint' */, 'static'], function () {
     var env = argv.env || argv.e || 'development'
 
     console.log(' --env ' + env)
@@ -52,12 +52,13 @@ gulp.task('static', function () {
   return merge(staticContent, css, mdiContent);
 })
 
-gulp.task('lint', function () {
-  return gulp.src(['./app/**/*.js', './gulpfile.js'])
-        .pipe($.jshint())
-        .pipe($.jshint.reporter('default'))
-        .pipe($.jshint.reporter('fail'));
-})
+//
+//gulp.task('lint', function () {
+//  return gulp.src(['./app/**/*.js', './gulpfile.js'])
+//        .pipe($.jshint())
+//        .pipe($.jshint.reporter('default'))
+//        .pipe($.jshint.reporter('fail'));
+//})
 
 gulp.task('templates', function () {
   return gulp.src([

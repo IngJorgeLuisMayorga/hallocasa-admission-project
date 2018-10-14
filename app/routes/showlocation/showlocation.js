@@ -3,23 +3,28 @@ var constructor, moduleName = 'app.showlocation'
 angular.module(moduleName, []).component('showlocation', {
     templateUrl: 'routes/showlocation/showlocation.html',
     controllerAs: 'vm',
-    controller: (constructor = ['Account', showlocationController])
+    controller: (constructor = ['Account','NgMap','$scope' , '$rootScope', showlocationController])
   })
 
-constructor.$canActivate = ['Account', function(Account) {
-  return Account.loginStatusForNavigation() || true
-}]
 
-function showlocationController(Account) {
-  var vm = this
 
-  vm.currentUser = null
+
+function showlocationController(Account,NgMap,$scope,$rootScope) {
+
+
+
+
+  var vm = this;
+
+  vm.STORAGE = $rootScope.gSTORAGE;
+
 
   vm.$routerOnActivate = function (/*toRoute , fromRoute */) {
-    //vm.name = toRoute.params.name
-    Account.getCachedUser().then(function(user) {
-      vm.currentUser = user
-    })
+    vm.showSTORAGE = $rootScope.gSTORAGE;
+  }
+
+  vm.getPosition = function(item){
+    return [item.position.lat , item.position.lng];
   }
 }
 

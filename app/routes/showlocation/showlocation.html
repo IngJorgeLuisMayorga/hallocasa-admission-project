@@ -2,48 +2,56 @@
   <section layout="column" layout-align="start center" layout-wrap>
     <h2>SHOW LOCATION</h2>
 
-    <div style="position: relative;display: block;width: 500px;">
+    <div style="position: relative;display: block;width:100%;box-sizing: border-box;padding: 10%">
     <ng-map zoom="8" center="4.6677389,-74.0571312">
 
-        <marker ng-repeat="(k, p) in vm.STORAGE track by $index"
+      <div ng-repeat="(k, p) in vm.STORAGE track by $index">
+
+        <marker
         id = "marker-{{k}}"
         on-click="map.showInfoWindow('info-{{k}}')"
         position="{{p.position.lat}},{{p.position.lng}}">
       </marker>
 
-      <info-window  ng-repeat="(k, p) in vm.STORAGE track by $index"
-      id="info-{{k}}" visible-on-marker="marker-{{k}}" >
-          <div ng-non-bindable>
-            <div id="siteNotice"></div>
-            <h1 id="firstHeading" class="firstHeading">Uluru</h1>
-            <div id="bodyContent">
-              <p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large
-              sandstone rock formation in the southern part of the
-              Northern Territory, central Australia. It lies 335 km (208 mi)
-              south west of the nearest large town, Alice Springs; 450 km
-              (280 mi) by road. Kata Tjuta and Uluru are the two major
-              features of the Uluru - Kata Tjuta National Park. Uluru is
-              sacred to the Pitjantjatjara and Yankunytjatjara, the
-              Aboriginal people of the area. It has many springs, waterholes,
-              rock caves and ancient paintings. Uluru is listed as a World
-              Heritage Site.</p>
-              <p>Attribution: Uluru, <a href="http://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">
-              http://en.wikipedia.org/w/index.php?title=Uluru</a>
-              (last visited June 22, 2009).</p>
-            </div>
+      <info-window  id="info-{{k}}"  >
+          <div>
+            <h1>{{p.name}}</h1>
+            <h2>{{p.address}}</h2>
+            <h3>Lat : {{p.position.lat}}</h3>
+            <h3>Lng : {{p.position.lng}}</h3>
           </div>
         </info-window>
+
+      </div>
 
         <directions
         draggable="true"
         panel="directions-panel"
         travel-mode="DRIVING"
-        origin="1135 Karamea-Kohaihai Rd, Kahurangi National Park, Tasman"
-        destination="Pier St, Jackson Bay, West Coast, New Zeland">
+        origin="{{vm.locationFrom}}"
+        destination="{{vm.locationTo}}">
       </directions>
 
     </ng-map>
   </div>
+
+<h2>GET A ROUTE !</h2>
+  <md-select ng-model="vm.locationFrom">
+      <md-option ng-disable="true"><em>From</em></md-option>
+      <md-option ng-repeat="place in vm.STORAGE" ng-value="place.name">
+        {{place.name}}
+      </md-option>
+  </md-select>
+
+
+  <md-select ng-model="vm.locationTo">
+      <md-option ng-disable="true"><em>From</em></md-option>
+      <md-option ng-repeat="place in vm.STORAGE" ng-value="place.name">
+        {{place.name}}
+      </md-option>
+  </md-select>
+
+
   </section>
 </md-content>
 

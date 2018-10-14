@@ -17,7 +17,8 @@ function showlocationController(Account,NgMap,$scope,$rootScope) {
   var vm = this;
 
   vm.STORAGE = $rootScope.gSTORAGE;
-
+vm.locationFrom = 'Aeropuerto el Dorado, Bogotá Colombia';
+vm.locationTo = 'Universidad Nacional, Bogotá Colombia';
 
   vm.$routerOnActivate = function (/*toRoute , fromRoute */) {
     vm.showSTORAGE = $rootScope.gSTORAGE;
